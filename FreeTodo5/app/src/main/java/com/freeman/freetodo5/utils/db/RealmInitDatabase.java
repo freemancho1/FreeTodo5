@@ -46,6 +46,8 @@ public class RealmInitDatabase extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 initTodoListGroup();
+                GlobalVariable.getInstance().setSideMenuFavoriteChange(true);
+                GlobalVariable.getInstance().setSideMenuItemsChange(true);
             }
         });
 
@@ -55,6 +57,8 @@ public class RealmInitDatabase extends AppCompatActivity {
             public void onClick(View v) {
                 mTodoListGroupRepo.removeAll();
                 mTodoListGroupList.setText("Dataset not found.");
+                GlobalVariable.getInstance().setSideMenuFavoriteChange(true);
+                GlobalVariable.getInstance().setSideMenuItemsChange(true);
             }
         });
 

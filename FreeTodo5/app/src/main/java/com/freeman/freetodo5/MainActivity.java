@@ -17,6 +17,7 @@ import com.freeman.freetodo5.todolist.group.adapter.TodoListGroupSideMenuFavorit
 import com.freeman.freetodo5.todolist.group.adapter.TodoListGroupSideMenuItemsAdapter;
 import com.freeman.freetodo5.todolist.group.model.TodoListGroup;
 import com.freeman.freetodo5.todolist.group.model.TodoListGroupRepository;
+import com.freeman.freetodo5.utils.db.GlobalVariable;
 import com.freeman.freetodo5.utils.db.RealmInitDatabase;
 
 import java.util.List;
@@ -83,35 +84,42 @@ public class MainActivity extends AppCompatActivity {
         mFavoriteAdapter = new TodoListGroupSideMenuFavoriteAdapter(this, mTodoListGroupRepo);
         mFavoriteView.setHasFixedSize(true);
         mFavoriteView.setLayoutManager(new LinearLayoutManager(this));
-//        mFavoriteAdapter.setItemLists(mTodoListGroupRepo.getFavorite());
+        mFavoriteAdapter.setItemLists(mTodoListGroupRepo.getFavorite());
         mFavoriteView.setAdapter(mFavoriteAdapter);
 
         mItemsAdapter = new TodoListGroupSideMenuItemsAdapter(this, mTodoListGroupRepo);
         mItemsView.setHasFixedSize(false);
         mItemsView.setLayoutManager(new LinearLayoutManager(this));
-//        mItemsAdapter.setItemLists(mTodoListGroupRepo.getChildren(""));
+        mItemsAdapter.setItemLists(mTodoListGroupRepo.getChildren(""));
         mItemsView.setAdapter(mItemsAdapter);
     }
 
     private void setAdapterItems() {
-        List<TodoListGroup> favoriteItems = mTodoListGroupRepo.getFavorite();
-        mFavoriteAdapter.setItemLists(favoriteItems);
-        if (favoriteItems.size() > 0) {
-            mFavoriteView.setVisibility(View.VISIBLE);
-            findViewById(R.id.main_sidemenu_divider1).setVisibility(View.VISIBLE);
-        } else {
-            mFavoriteView.setVisibility(View.GONE);
-            findViewById(R.id.main_sidemenu_divider1).setVisibility(View.GONE);
+
+        if (GlobalVariable.getInstance().isSideMenuFavoriteChange()) {
+            GlobalVariable.getInstance().setSideMenuFavoriteChange(false);
+            List<TodoListGroup> favoriteItems = mTodoListGroupRepo.getFavorite();
+            mFavoriteAdapter.setItemLists(favoriteItems);
+            if (favoriteItems.size() > 0) {
+                mFavoriteView.setVisibility(View.VISIBLE);
+                findViewById(R.id.main_sidemenu_divider1).setVisibility(View.VISIBLE);
+            } else {
+                mFavoriteView.setVisibility(View.GONE);
+                findViewById(R.id.main_sidemenu_divider1).setVisibility(View.GONE);
+            }
         }
 
-        List<TodoListGroup> itemsItems = mTodoListGroupRepo.getChildren("");
-        mItemsAdapter.setItemLists(itemsItems);
-        if (itemsItems.size() > 0) {
-            mItemsView.setVisibility(View.VISIBLE);
-            findViewById(R.id.main_sidemenu_divider2).setVisibility(View.VISIBLE);
-        } else {
-            mItemsView.setVisibility(View.GONE);
-            findViewById(R.id.main_sidemenu_divider2).setVisibility(View.GONE);
+        if (GlobalVariable.getInstance().isSideMenuItemsChange()) {
+            GlobalVariable.getInstance().setSideMenuItemsChange(false);
+            List<TodoListGroup> itemsItems = mTodoListGroupRepo.getChildren("");
+            mItemsAdapter.setItemLists(itemsItems);
+            if (itemsItems.size() > 0) {
+                mItemsView.setVisibility(View.VISIBLE);
+                findViewById(R.id.main_sidemenu_divider2).setVisibility(View.VISIBLE);
+            } else {
+                mItemsView.setVisibility(View.GONE);
+                findViewById(R.id.main_sidemenu_divider2).setVisibility(View.GONE);
+            }
         }
     }
 

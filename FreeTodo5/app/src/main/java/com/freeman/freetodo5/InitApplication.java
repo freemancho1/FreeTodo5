@@ -7,9 +7,6 @@ import io.realm.RealmConfiguration;
 
 public class InitApplication extends Application {
 
-    private boolean mSideMenuFavoriteChange = false;
-    private boolean mSideMenuItemsChange = false;
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -30,19 +27,4 @@ public class InitApplication extends Application {
         Realm.setDefaultConfiguration(configuration);
     }
 
-    public boolean isSideMenuFavoriteChange() {
-        return mSideMenuFavoriteChange;
-    }
-
-    public void setSideMenuFavoriteChange(boolean mSideMenuFavoriteChange) {
-        this.mSideMenuFavoriteChange = mSideMenuFavoriteChange;
-    }
-
-    public boolean isSideMenuItemsChange() {
-        return mSideMenuItemsChange;
-    }
-
-    public void setSideMenuItemsChange(boolean mSideMenuItemsChange) {
-        this.mSideMenuItemsChange = mSideMenuItemsChange;
-    }
 }
