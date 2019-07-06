@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+
+// Realm
+apply plugin: 'realm-android'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.freeman.freetodo5"
+        minSdkVersion 23
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    def sdk_version = "28.0.0"
+    def constrain_layout_version = "2.0.0-beta1"
+    def junit_version = "4.12"
+    def test_runner_version = "1.0.2"
+    def test_espresso_version = "3.0.2"
+
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    implementation "com.android.support:appcompat-v7:$sdk_version"
+
+    //noinspection GradleDependency
+    implementation "com.android.support.constraint:constraint-layout:$constrain_layout_version"
+
+    // Add necessary libraries
+    implementation "com.android.support:design:$sdk_version"
+    implementation "com.android.support:recyclerview-v7:$sdk_version"
+    implementation "com.android.support:cardview-v7:$sdk_version"
+
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "com.android.support.test:runner:$test_runner_version"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$test_espresso_version"
+}

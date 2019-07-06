@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_activity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:openDrawer="start"
+    tools:context=".MainActivity">
+
+    <!--
+    * Main content view
+        The 'main content view' should always be declared as the first child view of the DrawerLayout.
+        Because the first declared view is placed at the bottom,
+        the 'drawer menu view' can be displayed on top of that 'main content view(first declared view)'.
+    -->
+    <include
+        layout="@layout/main_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <!-- Drawer menu view -->
+    <LinearLayout
+        android:id="@+id/main_sidemenu_layout"
+        android:layout_width="@dimen/sys_drawer_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:orientation="vertical"
+        android:background="@color/colorWhite"
+        android:fitsSystemWindows="false">
+
+        <include
+            layout="@layout/main_sidemenu_header"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sidemenu_header_height"/>
+
+        <include
+            layout="@layout/main_sidemenu_menu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>
