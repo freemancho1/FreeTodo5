@@ -35,8 +35,9 @@ public class TodoListGroupRepository {
     }
 
     public List<TodoListGroup> getChildren(String parentId) {
-        return RealmResultToList(mRealm.where(TodoListGroup.class)
-                .equalTo("parentId", parentId).equalTo("isDelete", false).findAll());
+        return RealmResultToList(
+                mRealm.where(TodoListGroup.class)
+                        .equalTo("parentId", parentId).equalTo("isDelete", false).findAll());
     }
 
     public List<TodoListGroup> getAllTree(String parentId) {

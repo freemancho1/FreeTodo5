@@ -24,16 +24,14 @@ public class TodoListGroupSideMenuItemsAdapter
     private final TodoListGroupRepository mRepo;
     private List<TodoListGroup> mItemLists;
 
-    private final Context mContext;
     private final LayoutInflater mInflater;
     private final float mDensity;
 
     public TodoListGroupSideMenuItemsAdapter(
             Context context, @NonNull TodoListGroupRepository repository) {
         mRepo = repository;
-        mContext = context;
-        mInflater = LayoutInflater.from(mContext);
-        mDensity = mContext.getResources().getDisplayMetrics().density;
+        mInflater = LayoutInflater.from(context);
+        mDensity = context.getResources().getDisplayMetrics().density;
         Log.d(LOG_TAG, "Constructor mItemLists size - " + getItemCount());
     }
     @NonNull
@@ -45,7 +43,7 @@ public class TodoListGroupSideMenuItemsAdapter
 
     @Override
     public void onBindViewHolder(@NonNull ThisViewHolder thisViewHolder, int i) {
-        thisViewHolder.onBindData(mItemLists.get(i), i);
+        thisViewHolder.onBindData(mItemLists.get(i));
     }
 
     @Override
@@ -74,7 +72,7 @@ public class TodoListGroupSideMenuItemsAdapter
             mmChildrenShow = itemView.findViewById(R.id.main_sidemenu_menu_items_children_show);
         }
 
-        public void onBindData(final TodoListGroup todoListGroup, int position) {
+        public void onBindData(final TodoListGroup todoListGroup) {
             Log.d(LOG_TAG, "Binding data - " + todoListGroup.toString());
 
             mmColor.setColorFilter(todoListGroup.getColor());

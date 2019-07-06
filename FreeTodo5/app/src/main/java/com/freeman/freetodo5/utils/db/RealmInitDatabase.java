@@ -3,6 +3,9 @@ package com.freeman.freetodo5.utils.db;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,12 +32,28 @@ public class RealmInitDatabase extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.realm_init_database_activity);
+        setTitle(R.string.init_db_title);
         
         mRealm = Realm.getDefaultInstance();
 
         todoListGroupManager();
 
     }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.home:
+//                finish();
+//                break;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     private void todoListGroupManager() {
         mTodoListGroupRepo = new TodoListGroupRepository(mRealm);
