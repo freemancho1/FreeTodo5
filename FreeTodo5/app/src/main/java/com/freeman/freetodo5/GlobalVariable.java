@@ -1,4 +1,4 @@
-package com.freeman.freetodo5.utils.db;
+package com.freeman.freetodo5;
 
 public class GlobalVariable {
     private static GlobalVariable instance = null;

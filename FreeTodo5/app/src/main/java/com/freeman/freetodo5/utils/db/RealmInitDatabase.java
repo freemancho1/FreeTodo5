@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.freeman.freetodo5.GlobalVariable;
 import com.freeman.freetodo5.R;
 import com.freeman.freetodo5.todolist.group.model.TodoListGroup;
 import com.freeman.freetodo5.todolist.group.model.TodoListGroupRepository;
@@ -16,7 +17,6 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmList;
-import io.realm.RealmResults;
 
 public class RealmInitDatabase extends AppCompatActivity {
     private static final String LOG_TAG = "[INIT DB]";

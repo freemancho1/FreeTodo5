@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".utils.db.RealmInitDatabase"></activity>
+        <activity android:name=".todolist.group.activity.TodoListGroupManager"></activity>
+        <activity android:name=".utils.db.RealmInitDatabase" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">

@@ -17,7 +17,6 @@ import com.freeman.freetodo5.todolist.group.adapter.TodoListGroupSideMenuFavorit
 import com.freeman.freetodo5.todolist.group.adapter.TodoListGroupSideMenuItemsAdapter;
 import com.freeman.freetodo5.todolist.group.model.TodoListGroup;
 import com.freeman.freetodo5.todolist.group.model.TodoListGroupRepository;
-import com.freeman.freetodo5.utils.db.GlobalVariable;
 import com.freeman.freetodo5.utils.db.RealmInitDatabase;
 
 import java.util.List;
@@ -28,13 +27,14 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = "[MAIN]";
 
     private Realm mRealm;
+    private DrawerLayout mMainActivity;
+
     private TodoListGroupRepository mTodoListGroupRepo;
+
     private TodoListGroupSideMenuFavoriteAdapter mFavoriteAdapter;
     private TodoListGroupSideMenuItemsAdapter mItemsAdapter;
 
-    private RecyclerView mFavoriteView, mItemsView;
-
-    private DrawerLayout mMainActivity;
+    private RecyclerView mFavoriteView, mGroupView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,27 +71,42 @@ public class MainActivity extends AppCompatActivity {
         setSideMenu();
     }
 
+    @Override
+    public void onBackPressed() {
+        if (mMainActivity.isDrawerOpen(GravityCompat.START)) {
+            mMainActivity.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mRealm != null) mRealm.close();
+    }
+
     private void setSideMenu() {
+
         findViewById(R.id.main_sidemenu_menu_today).setOnClickListener(sideMenuClickListener);
         findViewById(R.id.main_sidemenu_menu_7_days).setOnClickListener(sideMenuClickListener);
         findViewById(R.id.main_sidemenu_menu_all_days).setOnClickListener(sideMenuClickListener);
         findViewById(R.id.main_sidemenu_menu_settings).setOnClickListener(sideMenuClickListener);
         findViewById(R.id.main_sidemenu_menu_init_db).setOnClickListener(sideMenuClickListener);
 
-        mFavoriteView = findViewById(R.id.main_sidemenu_menu_list_favorite);
-        mItemsView = findViewById(R.id.main_sidemenu_menu_list_recycler_view);
-
         mFavoriteAdapter = new TodoListGroupSideMenuFavoriteAdapter(this, mTodoListGroupRepo);
+        mFavoriteView = findViewById(R.id.main_sidemenu_menu_list_favorite);
         mFavoriteView.setHasFixedSize(true);
         mFavoriteView.setLayoutManager(new LinearLayoutManager(this));
         mFavoriteAdapter.setItemLists(mTodoListGroupRepo.getFavorite());
         mFavoriteView.setAdapter(mFavoriteAdapter);
 
         mItemsAdapter = new TodoListGroupSideMenuItemsAdapter(this, mTodoListGroupRepo);
-        mItemsView.setHasFixedSize(false);
-        mItemsView.setLayoutManager(new LinearLayoutManager(this));
+        mGroupView = findViewById(R.id.main_sidemenu_menu_list_recycler_view);
+        mGroupView.setHasFixedSize(false);
+        mGroupView.setLayoutManager(new LinearLayoutManager(this));
         mItemsAdapter.setItemLists(mTodoListGroupRepo.getChildren(""));
-        mItemsView.setAdapter(mItemsAdapter);
+        mGroupView.setAdapter(mItemsAdapter);
     }
 
     private void setAdapterItems() {
@@ -114,10 +129,10 @@ public class MainActivity extends AppCompatActivity {
             List<TodoListGroup> itemsItems = mTodoListGroupRepo.getChildren("");
             mItemsAdapter.setItemLists(itemsItems);
             if (itemsItems.size() > 0) {
-                mItemsView.setVisibility(View.VISIBLE);
+                mGroupView.setVisibility(View.VISIBLE);
                 findViewById(R.id.main_sidemenu_divider2).setVisibility(View.VISIBLE);
             } else {
-                mItemsView.setVisibility(View.GONE);
+                mGroupView.setVisibility(View.GONE);
                 findViewById(R.id.main_sidemenu_divider2).setVisibility(View.GONE);
             }
         }
@@ -144,22 +159,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
 
-            mMainActivity.closeDrawer(GravityCompat.START);
         }
     };
 
-    @Override
-    public void onBackPressed() {
-        if (mMainActivity.isDrawerOpen(GravityCompat.START)) {
-            mMainActivity.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mRealm != null) mRealm.close();
-    }
 }
