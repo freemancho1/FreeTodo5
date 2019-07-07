@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    // System baseline setting.
+    <dimen name="sys_spacing_16dp">16dp</dimen>
+    <dimen name="sys_spacing_8dp">8dp</dimen>
+
+    <dimen name="sys_activity_margin">16dp</dimen>
+    <dimen name="sys_fab_margin">16dp</dimen>
+
+    <dimen name="sys_icon_size">16dp</dimen>
+
+    // Font size setting.
+    <dimen name="sys_large_text_size">20sp</dimen>
+    <dimen name="sys_medium_text_size">15sp</dimen>
+    <dimen name="sys_small_text_size">12sp</dimen>
+    <dimen name="sys_smaller_text_size">10sp</dimen>
+
+    // Side-menu setting.
+    <dimen name="sidemenu_header_height">150dp</dimen>
+    <dimen name="sidemenu_header_vertical_spacing">8dp</dimen>
+    <dimen name="sidemenu_header_logo_spacing">22dp</dimen>
+    <dimen name="sidemenu_header_logo_size">50dp</dimen>
+
+    // Navigation icon size override.
+    <dimen name="design_navigation_icon_size" tools:ignore="PrivateResource">20dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+</resources>

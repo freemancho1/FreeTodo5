@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import com.freeman.freetodo5.todolist.group.activity.TodoListGroupManager;
 import com.freeman.freetodo5.todolist.group.adapter.TodoListGroupSideMenuFavoriteAdapter;
 import com.freeman.freetodo5.todolist.group.adapter.TodoListGroupSideMenuItemsAdapter;
 import com.freeman.freetodo5.todolist.group.model.TodoListGroup;
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.main_sidemenu_menu_today).setOnClickListener(sideMenuClickListener);
         findViewById(R.id.main_sidemenu_menu_7_days).setOnClickListener(sideMenuClickListener);
         findViewById(R.id.main_sidemenu_menu_all_days).setOnClickListener(sideMenuClickListener);
+        findViewById(R.id.main_sidemenu_menu_group_manager).setOnClickListener(sideMenuClickListener);
         findViewById(R.id.main_sidemenu_menu_settings).setOnClickListener(sideMenuClickListener);
         findViewById(R.id.main_sidemenu_menu_init_db).setOnClickListener(sideMenuClickListener);
 
@@ -149,6 +151,10 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.main_sidemenu_menu_init_db:
                     intentClass = RealmInitDatabase.class;
+                    break;
+                case R.id.main_sidemenu_menu_group_manager:
+                    intentClass = TodoListGroupManager.class;
+                    Log.d(LOG_TAG, "main_sidemenu_menu_group_manager click");
                     break;
                 default:
                     break;

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sample_recycler_item2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_marginTop="@dimen/sys_spacing_16dp"
+    android:layout_marginBottom="@dimen/sys_spacing_16dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="20"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/sys_spacing_8dp"
+        android:layout_marginEnd="@dimen/sys_spacing_8dp"
+        android:gravity="center_vertical">
+        <ImageView
+            android:id="@+id/sample_recycler_item2_color"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/sys_icon_size"
+            android:src="@drawable/ic_blank_circle" />
+
+        <TextView
+            android:id="@+id/sample_recycler_item2_todogroup_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="@dimen/sys_medium_text_size"
+            android:singleLine="true"
+            android:layout_marginStart="@dimen/sys_spacing_8dp"
+            android:ellipsize="end" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/sample_recycler_item2_children_show"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="@dimen/sys_icon_size"
+        android:tint="@color/colorDarkGray"
+        android:src="@drawable/ic_arrow_down" />
+
+    <ImageView
+        android:id="@+id/sample_recycler_item2_favorite"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="@dimen/sys_icon_size"
+        android:src="@drawable/ic_heart_broken" />
+
+</LinearLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="colorWhite">#ffffff</color>
+
+    <color name="colorLightGray">#eeeeee</color>
+    <color name="colorMediumGray">#cccccc</color>
+    <color name="colorDarkGray">#aaaaaa</color>
+
+    <color name="colorRed">#FFFF2222</color>
+
+    <color name="navHeaderBackgroundStart">#4DB6AC</color>
+    <color name="navHeaderBackgroundCenter">#009688</color>
+    <color name="navHeaderBackgroundEnd">#00695C</color>
+</resources>

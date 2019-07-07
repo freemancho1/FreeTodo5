@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.multilevelview.MultiLevelRecyclerView
+        android:id="@+id/project_menu_list_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/sys_spacing_16dp"
+        tools:listitem="@layout/item_project_list"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/project_add_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/sys_fab_margin"
+        app:backgroundTint="@color/colorPrimaryDark"
+        android:tint="@color/colorWhite"
+        android:backgroundTint="@color/colorPrimary"
+        app:srcCompat="@drawable/apply" />
+
+</android.support.design.widget.CoordinatorLayout>

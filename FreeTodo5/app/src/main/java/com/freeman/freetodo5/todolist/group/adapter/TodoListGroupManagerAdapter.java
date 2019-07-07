@@ -3,6 +3,7 @@ package com.freeman.freetodo5.todolist.group.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,9 @@ public class TodoListGroupManagerAdapter
         extends RecyclerView.Adapter<TodoListGroupManagerAdapter.ThisViewHolder> {
 
     private static final String LOG_TAG = TodoListGroupManagerAdapter.class.getSimpleName();
+
+    private static final int FAVORITE_CHECK_COLOR = 0xFFEE3333;
+    private static final int FAVORITE_NONCHECK_COLOR = 0xFFDDDDDD;
 
     private final TodoListGroupRepository mRepo;
     private List<TodoListGroup> mItemLists;
@@ -76,6 +80,27 @@ public class TodoListGroupManagerAdapter
         }
 
         public void onBindData(final TodoListGroup todoListGroup) {
+            Log.d(LOG_TAG, "Binding data - " + todoListGroup.toString());
+
+            mmColor.setColorFilter(todoListGroup.getColor());
+            ((ViewGroup.MarginLayoutParams) mmColor.getLayoutParams())
+                    .leftMargin = (int) (todoListGroup.getDepth() * 25 * mDensity);
+
+            mmName.setText(todoListGroup.getName());
+
+            if (todoListGroup.isChildren()) {
+                mmChildrenShow.setVisibility(View.VISIBLE);
+            } else {
+                mmChildrenShow.setVisibility(View.GONE);
+            }
+
+            if (todoListGroup.isFavorite()) {
+                mmFavorite.setColorFilter(FAVORITE_CHECK_COLOR);
+                mmFavorite.setImageResource(R.drawable.ic_heart);
+            } else {
+                mmFavorite.setColorFilter(FAVORITE_NONCHECK_COLOR);
+                mmFavorite.setImageResource(R.drawable.ic_heart_broken);
+            }
 
         }
 

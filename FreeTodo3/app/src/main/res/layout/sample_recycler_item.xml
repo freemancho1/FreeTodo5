@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sample_recycler_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/sys_spacing_8dp"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:background="@color/colorWhite">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/sample_recycler_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sample_recycler_title"
+                android:textSize="@dimen/sys_medium_text_size"
+                android:textStyle="bold"
+                android:includeFontPadding="false" />
+
+            <TextView
+                android:id="@+id/sample_recycler_item_contents"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sample_recycler_contents"
+                android:textSize="@dimen/sys_small_text_size"
+                android:includeFontPadding="false"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/sample_recycler_item_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_heart"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/sample_recycler_item_image_detail"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:src="@drawable/ty1"
+        android:visibility="gone"
+        android:animateLayoutChanges="true"/>
+
+</LinearLayout>

@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Free Todo</string>
+    <string name="nav_drawer_open">Open navigation drawer</string>
+    <string name="nav_drawer_close">Close navigation drawer</string>
+
+    <string name="sys_msg_any_task">하고 싶은 작업을 처리하세요.</string>
+
+    <string name="sidemenu_header_subtitle">언제, 어디서나, 즐겁고, 자유롭게\n당신의 일정을 관리하세요.</string>
+    <string name="sidemenu_header_copyright">freeman.no1@kdn.com</string>
+    <string name="sidemenu_menu_project">그룹 관리</string>
+    <string name="sidemenu_menu_today">오늘 할 일</string>
+    <string name="sidemenu_menu_7_days">앞으로 7일간 할 일</string>
+    <string name="sidemenu_menu_all_days">모든 할 일</string>
+    <string name="sidemenu_menu_settings">설정</string>
+
+    <string name="main_optionmenu_init_data">데이터 초기화</string>
+
+    <string name="initialize_db_title">데이터 초기화</string>
+
+    <string name="todogroup_manager_title">그룹 관리</string>
+
+    <string name="sample_recycler_title">TITLE</string>
+    <string name="sample_recycler_contents">Contents</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+</resources>
