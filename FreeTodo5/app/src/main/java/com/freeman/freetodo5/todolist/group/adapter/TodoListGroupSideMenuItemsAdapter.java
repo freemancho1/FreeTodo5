@@ -75,6 +75,11 @@ public class TodoListGroupSideMenuItemsAdapter
         public void onBindData(final TodoListGroup todoListGroup) {
             Log.d(LOG_TAG, "Binding data - " + todoListGroup.toString());
 
+            if (todoListGroup.isFavorite()) {
+                mmColor.setImageResource(R.drawable.ic_heart);
+            } else {
+                mmColor.setImageResource(R.drawable.ic_blank_circle);
+            }
             mmColor.setColorFilter(todoListGroup.getColor());
             ((ViewGroup.MarginLayoutParams) mmColor.getLayoutParams())
                     .leftMargin = (int) (todoListGroup.getDepth() * 25 * mDensity);

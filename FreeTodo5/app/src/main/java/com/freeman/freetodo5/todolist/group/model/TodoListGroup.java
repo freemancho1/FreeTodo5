@@ -34,7 +34,6 @@ public class TodoListGroup {
     private int             isExpanded = 0;
 
     public TodoListGroup() {}
-
     public TodoListGroup(String parentId) {
         this.parentId = parentId;
     }

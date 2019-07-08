@@ -5,6 +5,9 @@
 
     <string name="sys_msg_any_task">하고 싶은 작업을 처리하세요.</string>
 
+    <string name="sys_msg_delete">삭제</string>
+    <string name="sys_msg_cancel">취소</string>
+
     <string name="sidemenu_header_subtitle">언제, 어디서나, 즐겁고, 자유롭게\n당신의 일정을 관리하세요.</string>
     <string name="sidemenu_header_copyright">freeman.no1@kdn.com</string>
     <string name="sidemenu_menu_project">그룹 관리</string>
@@ -22,6 +25,7 @@
     <string name="init_db_removeall_message">Remove all</string>
 
     <string name="todogroup_manager_title">그룹 관리</string>
+    <string name="todogroup_manager_alert_delete_message">삭제 하시겠습니까?</string>
 
     <string name="sample_recycler_title">TITLE</string>
     <string name="sample_recycler_contents">Contents</string>

@@ -1,7 +1,9 @@
 package com.freeman.freetodo5.todolist.group.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +28,7 @@ public class TodoListGroupManagerAdapter
     private static final int FAVORITE_CHECK_COLOR = 0xFFEE3333;
     private static final int FAVORITE_NONCHECK_COLOR = 0xFFDDDDDD;
 
+    private final Context mContext;
     private final TodoListGroupRepository mRepo;
     private List<TodoListGroup> mItemLists;
 
@@ -34,6 +37,7 @@ public class TodoListGroupManagerAdapter
 
     public TodoListGroupManagerAdapter(
             Context context, @NonNull TodoListGroupRepository repository) {
+        mContext = context;
         mRepo = repository;
         mInflater = LayoutInflater.from(context);
         mDensity = context.getResources().getDisplayMetrics().density;
@@ -93,7 +97,6 @@ public class TodoListGroupManagerAdapter
             mmName.setText(todoListGroup.getName());
 
             if (todoListGroup.isChildren()) {
-//                mItemLists.get(position).setExpanded(true);
                 showAnimation(mItemLists.get(position).isExpanded());
                 mmChildrenShow.setVisibility(View.VISIBLE);
             } else {
@@ -110,6 +113,7 @@ public class TodoListGroupManagerAdapter
 
             mmGoAction.setOnClickListener(this);
             mmChildrenShow.setOnClickListener(this);
+            mmFavorite.setOnClickListener(this);
             mmDelete.setOnClickListener(this);
         }
 
@@ -118,21 +122,67 @@ public class TodoListGroupManagerAdapter
         }
 
         private void mmDeleteClick() {
-            int position = getAdapterPosition();
-            TodoListGroup todoListGroup = mItemLists.get(position);
+            final int position = getAdapterPosition();
+            final TodoListGroup todoListGroup = mItemLists.get(position);
 
-            mRepo.delete(todoListGroup);
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+            builder.setTitle(todoListGroup.getName())
+                    .setMessage(R.string.todogroup_manager_alert_delete_message)
+                    .setPositiveButton(R.string.sys_msg_delete,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    deleteTodoListGroup(position, todoListGroup);
+                                }
+                            })
+                    .setNegativeButton(R.string.sys_msg_cancel,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {}
+                            });
 
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
+
+        private void deleteTodoListGroup(int position, TodoListGroup todoListGroup) {
             if (todoListGroup.isChildren()) {
-                invisibleChildren(position+1, position);
+                invisibleChildren(position+1, position, true);
             }
+
             mItemLists.remove(position);
             notifyItemRangeRemoved(position, 1);
 
-            GlobalVariable.getInstance().setSideMenuItemsChange(true);
-            if (todoListGroup.isFavorite()) {
-                GlobalVariable.getInstance().setSideMenuFavoriteChange(true);
+            mRepo.delete(todoListGroup);
+
+            if (mRepo.getChildren(todoListGroup.getParentId()).size() == 0) {
+                TodoListGroup item = mRepo.get(todoListGroup.getParentId());
+                item.setChildren(false);
+                mRepo.update(item);
+                mItemLists.get(position-1).setChildren(false);
+                notifyItemChanged(position-1, mItemLists.get(position-1));
             }
+
+            GlobalVariable.getInstance().setSideMenuChange(true);
+        }
+
+        private void mmFavoriteClick() {
+            final int position = getAdapterPosition();
+            final TodoListGroup todoListGroup = mItemLists.get(position);
+
+            if (todoListGroup.isFavorite()) {
+                mmFavorite.setColorFilter(FAVORITE_NONCHECK_COLOR);
+                mmFavorite.setImageResource(R.drawable.ic_heart_broken);
+                todoListGroup.setFavorite(false);
+            } else {
+                mmFavorite.setColorFilter(FAVORITE_CHECK_COLOR);
+                mmFavorite.setImageResource(R.drawable.ic_heart);
+                todoListGroup.setFavorite(true);
+            }
+            mItemLists.set(position, todoListGroup);
+            notifyItemChanged(position, todoListGroup);
+            mRepo.update(todoListGroup);
+            GlobalVariable.getInstance().setSideMenuChange(true);
         }
 
         private void mmChildrenShowClick() {
@@ -141,7 +191,7 @@ public class TodoListGroupManagerAdapter
 
             if (todoListGroup.isExpanded()) {
                 todoListGroup.setExpanded(false);
-                invisibleChildren(0, position);
+                invisibleChildren(position+1, position);
             } else {
                 todoListGroup.setExpanded(true);
                 visibleChildren(position);
@@ -164,6 +214,9 @@ public class TodoListGroupManagerAdapter
         }
 
         private void invisibleChildren(int startPosition, int thisPosition) {
+            invisibleChildren(startPosition, thisPosition, false);
+        }
+        private void invisibleChildren(int startPosition, int thisPosition, boolean isDbDelete) {
             int allItemSize = mItemLists.size();
 
             for (int i = startPosition; i < allItemSize; i++) {
@@ -172,9 +225,11 @@ public class TodoListGroupManagerAdapter
 
                     if (mItemLists.get(i).isExpanded()) {
                         mItemLists.get(i).setExpanded(false);
-                        invisibleChildren(i+1, i);
+                        invisibleChildren(i+1, i, isDbDelete);
                         allItemSize = mItemLists.size();
                     }
+
+                    if (isDbDelete) mRepo.delete(mItemLists.get(i));
 
                     mItemLists.remove(i);
                     notifyItemRangeRemoved(i, 1);
@@ -194,6 +249,9 @@ public class TodoListGroupManagerAdapter
                     break;
                 case R.id.todo_list_group_manager_view_items_delete:
                     mmDeleteClick();
+                    break;
+                case R.id.todo_list_group_manager_view_items_favorite:
+                    mmFavoriteClick();
                     break;
                 case R.id.todo_list_group_manager_view_items_children_show:
                     mmChildrenShowClick();
