@@ -22,6 +22,11 @@ public class GlobalVariable {
         this.mSideMenuItemsChange = mSideMenuItemsChange;
     }
 
+    public void setSideMenuChange(boolean sideMenuChange) {
+        this.mSideMenuFavoriteChange = sideMenuChange;
+        this.mSideMenuItemsChange = sideMenuChange;
+    }
+
     public static synchronized GlobalVariable getInstance() {
         if (instance == null) instance = new GlobalVariable();
         return instance;

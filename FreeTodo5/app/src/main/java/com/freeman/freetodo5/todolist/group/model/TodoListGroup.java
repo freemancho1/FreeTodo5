@@ -1,39 +1,46 @@
 package com.freeman.freetodo5.todolist.group.model;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 import java.util.UUID;
 
-import io.realm.RealmObject;
-import io.realm.annotations.Ignore;
-import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.Required;
-
-public class TodoListGroup extends RealmObject {
+@Entity(tableName = "tbl_todolistgroup")
+public class TodoListGroup {
 
     @PrimaryKey
-    @Required
+    @NonNull
     private String          id = UUID.randomUUID().toString().replaceAll("-", "");
 
-    @Required
     private String          name;
-
     private String          memo;
     private int             color;
-
+    @ColumnInfo(name = "parent_id")
     private String          parentId = "";
     private int             depth = 0;
     private int             sequence =0;
 
-    private boolean         isChildren = false;
-    private boolean         isFavorite = false;
-    private boolean         isDelete = false;
+    @ColumnInfo(name = "is_children")
+    private int             isChildren = 0;
+    @ColumnInfo(name = "is_favorite")
+    private int             isFavorite = 0;
+    @ColumnInfo(name = "is_delete")
+    private int             isDelete = 0;
 
     @Ignore
-    private boolean         isExpanded = false;
+    private int             isExpanded = 0;
 
     public TodoListGroup() {}
+
+    public TodoListGroup(String parentId) {
+        this.parentId = parentId;
+    }
     public TodoListGroup(
             String name, String memo, int color,
-            String parentId, int depth, int sequence, boolean isFavorite) {
+            String parentId, int depth, int sequence, int isFavorite) {
         this.name = name;
         this.memo = memo;
         this.color = color;
@@ -117,34 +124,58 @@ public class TodoListGroup extends RealmObject {
     }
 
     public boolean isChildren() {
+        return isChildren == 1;
+    }
+    public int getIsChildren() {
         return isChildren;
     }
 
     public void setChildren(boolean children) {
-        isChildren = children;
+        isChildren = children ? 1: 0;
+    }
+    public void setIsChildren(int isChildren) {
+        this.isChildren = isChildren;
     }
 
     public boolean isFavorite() {
+        return isFavorite == 1;
+    }
+    public int getIsFavorite() {
         return isFavorite;
     }
 
     public void setFavorite(boolean favorite) {
-        isFavorite = favorite;
+        isFavorite = favorite ? 1: 0;
+    }
+    public void setIsFavorite(int isFavorite) {
+        this.isFavorite = isFavorite;
     }
 
     public boolean isDelete() {
+        return isDelete == 1;
+    }
+    public int getIsDelete() {
         return isDelete;
     }
 
     public void setDelete(boolean delete) {
-        isDelete = delete;
+        isDelete = delete ? 1: 0;
+    }
+    public void setIsDelete(int isDelete) {
+        this.isDelete = isDelete;
     }
 
     public boolean isExpanded() {
+        return isExpanded == 1;
+    }
+    public int getIsExpanded() {
         return isExpanded;
     }
 
     public void setExpanded(boolean expanded) {
-        isExpanded = expanded;
+        isExpanded = expanded ? 1: 0;
+    }
+    public void setIsExpanded(int isExpanded) {
+        this.isExpanded = isExpanded;
     }
 }

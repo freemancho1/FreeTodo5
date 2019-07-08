@@ -11,13 +11,9 @@ import android.view.View;
 import com.freeman.freetodo5.R;
 import com.freeman.freetodo5.todolist.group.adapter.TodoListGroupManagerAdapter;
 import com.freeman.freetodo5.todolist.group.model.TodoListGroupRepository;
-import com.freeman.freetodo5.utils.db.RealmInitDatabase;
-
-import io.realm.Realm;
+import com.freeman.freetodo5.utils.db.InitDatabase;
 
 public class TodoListGroupManager extends AppCompatActivity {
-
-    private Realm mRealm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,29 +21,23 @@ public class TodoListGroupManager extends AppCompatActivity {
         setContentView(R.layout.todo_list_group_manager_activity);
         setTitle(R.string.sidemenu_menu_project);
 
-        mRealm = Realm.getDefaultInstance();
-        TodoListGroupRepository repository = new TodoListGroupRepository(mRealm);
+        TodoListGroupRepository repository = new TodoListGroupRepository(getApplication());
 
         RecyclerView recyclerView = findViewById(R.id.todo_list_group_manager_view);
         TodoListGroupManagerAdapter adapter = new TodoListGroupManagerAdapter(this, repository);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter.setItemLists(repository.getAllTree(""));
+        adapter.setItemLists(repository.getTree(""));
         recyclerView.setAdapter(adapter);
 
         FloatingActionButton fabMain = findViewById(R.id.main_fab);
         fabMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), RealmInitDatabase.class);
+                Intent intent = new Intent(getApplicationContext(), InitDatabase.class);
                 startActivity(intent);
             }
         });
     }
 
-    @Override
-    protected void onDestroy() {
-        if (mRealm != null) mRealm.close();
-        super.onDestroy();
-    }
 }

@@ -1,126 +1,159 @@
 package com.freeman.freetodo5.todolist.group.model;
 
-import android.support.annotation.NonNull;
+import android.app.Application;
+
+import com.freeman.freetodo5.todolist.group.model.async.GetTodoListGroupAsyncTask;
+import com.freeman.freetodo5.todolist.group.model.async.GetTodoListGroupsAsyncTask;
+import com.freeman.freetodo5.todolist.group.model.async.SetTodoListGroupAsyncTask;
+import com.freeman.freetodo5.utils.db.AppDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.realm.Realm;
-import io.realm.RealmResults;
+import java.util.concurrent.ExecutionException;
 
 public class TodoListGroupRepository {
 
-    private final Realm mRealm;
+    public static final int SELECT_ALL = 1001;
+    public static final int SELECT_ALL_WITHOUT_DELETE_ITEMS = 1002;
+    public static final int SELECT_ID = 1003;
+    public static final int SELECT_CHILDREN = 1004;
+    public static final int SELECT_FAVORITE = 1005;
+    public static final int INSERT_ID = 2001;    // with update
+    public static final int INSERT_ARRAY = 2002;    // with update
+    public static final int REMOVE_ALL = 3001;
+    public static final int REMOVE_ID = 3002;
+    public static final int REMOVE_ARRAY = 3003;
 
-    public TodoListGroupRepository(Realm mRealm) {
-        this.mRealm = mRealm;
-    }
+    private final TodoListGroupDao mDao;
+    private TodoListGroup mDummyData;
 
-    private List<TodoListGroup> RealmResultToList(
-            @NonNull RealmResults<TodoListGroup> todoListGroups) {
-        List<TodoListGroup> results = new ArrayList<>();
-        for(TodoListGroup todoListGroup: todoListGroups) {
-            results.add(todoListGroup);
-        }
-        return results;
+    public TodoListGroupRepository(Application application) {
+        AppDatabase database = AppDatabase.getInstance(application);
+        mDao = database.todoListGroupDao();
+        mDummyData = new TodoListGroup();
     }
 
     public TodoListGroup get(String id) {
-        return mRealm.where(TodoListGroup.class)
-                .equalTo("id", id).equalTo("isDelete", false).findFirst();
+        TodoListGroup result = new TodoListGroup();
+
+        try {
+            result = new GetTodoListGroupAsyncTask(mDao, SELECT_ID)
+                    .execute(id).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
-    public List<TodoListGroup> get() {
-        return RealmResultToList(
-                mRealm.where(TodoListGroup.class).equalTo("isDelete", false).findAll());
+
+    public List<TodoListGroup> getAll() {
+        return getAllTodoListGroup(SELECT_ALL_WITHOUT_DELETE_ITEMS);
+    }
+    public List<TodoListGroup> getAll(boolean withoutDeleteFlag) {
+        if (withoutDeleteFlag) {
+            return getAllTodoListGroup(SELECT_ALL_WITHOUT_DELETE_ITEMS);
+        } else {
+            return getAllTodoListGroup(SELECT_ALL);
+        }
     }
 
     public List<TodoListGroup> getChildren(String parentId) {
-        return RealmResultToList(
-                mRealm.where(TodoListGroup.class)
-                        .equalTo("parentId", parentId).equalTo("isDelete", false).findAll());
+        mDummyData = new TodoListGroup(parentId);
+        return getAllTodoListGroup(SELECT_CHILDREN);
     }
 
-    public List<TodoListGroup> getAllTree(String parentId) {
+    public List<TodoListGroup> getTree(String parentId) {
         List<TodoListGroup> results = new ArrayList<>();
+
         List<TodoListGroup> children = getChildren(parentId);
         for (TodoListGroup todoListGroup: children) {
             results.add(todoListGroup);
-            if (todoListGroup.isChildren()) results.addAll(getAllTree(todoListGroup.getId()));
+            if (todoListGroup.isChildren()) {
+                results.addAll(getTree(todoListGroup.getId()));
+            }
         }
+
         return results;
     }
 
-    public List<TodoListGroup> getFavorite() {
-        return RealmResultToList(mRealm.where(TodoListGroup.class)
-                .equalTo("isFavorite", true).equalTo("isDelete", false).findAll());
+    public List<TodoListGroup> getFavorites() {
+        return getAllTodoListGroup(SELECT_FAVORITE);
+    }
+
+    private List<TodoListGroup> getAllTodoListGroup(int type) {
+        List<TodoListGroup> results = new ArrayList<>();
+
+        try {
+            switch (type) {
+                case SELECT_ALL:
+                    results =
+                            new GetTodoListGroupsAsyncTask(mDao, SELECT_ALL)
+                                    .execute(mDummyData).get();
+                    break;
+                case SELECT_ALL_WITHOUT_DELETE_ITEMS:
+                    results =
+                            new GetTodoListGroupsAsyncTask(
+                                    mDao, SELECT_ALL_WITHOUT_DELETE_ITEMS)
+                                    .execute(mDummyData).get();
+                    break;
+                case SELECT_CHILDREN:
+                    results =
+                            new GetTodoListGroupsAsyncTask(mDao, SELECT_CHILDREN)
+                                    .execute(mDummyData).get();
+                    break;
+                case SELECT_FAVORITE:
+                    results =
+                            new GetTodoListGroupsAsyncTask(mDao, SELECT_FAVORITE)
+                                    .execute(mDummyData).get();
+                    break;
+            }
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return results;
     }
 
     public void insert(TodoListGroup todoListGroup) {
-        insertOrUpdate(todoListGroup);
+        new SetTodoListGroupAsyncTask(mDao, INSERT_ID).execute(todoListGroup);
     }
     public void insert(List<TodoListGroup> todoListGroups) {
-        insertOrUpdate(todoListGroups);
+        new SetTodoListGroupAsyncTask(mDao, INSERT_ARRAY)
+                .execute(todoListGroups.toArray(new TodoListGroup[0]));
     }
 
     public void update(TodoListGroup todoListGroup) {
-        insertOrUpdate(todoListGroup);
+        new SetTodoListGroupAsyncTask(mDao, INSERT_ID).execute(todoListGroup);
     }
     public void update(List<TodoListGroup> todoListGroups) {
-        insertOrUpdate(todoListGroups);
+        new SetTodoListGroupAsyncTask(mDao, INSERT_ARRAY)
+                .execute(todoListGroups.toArray(new TodoListGroup[0]));
     }
 
+    public void delete(String id) {
+        delete(get(id));
+    }
     public void delete(TodoListGroup todoListGroup) {
         todoListGroup.setDelete(true);
-        insertOrUpdate(todoListGroup);
+        update(todoListGroup);
     }
     public void delete(List<TodoListGroup> todoListGroups) {
-        for (int i=0; i<todoListGroups.size(); i++) {
-            todoListGroups.get(i).setDelete(true);
-        }
-        insertOrUpdate(todoListGroups);
+        for (TodoListGroup todoListGroup: todoListGroups) todoListGroup.setDelete(true);
+        update(todoListGroups);
     }
 
-    public void remove(final String id) {
-        mRealm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                TodoListGroup todoListGroup = get(id);
-                if (todoListGroup != null) remove(todoListGroup);
-            }
-        });
-    }
-    public void remove(final TodoListGroup todoListGroup) {
-        mRealm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                todoListGroup.deleteFromRealm();
-            }
-        });
-    }
     public void removeAll() {
-        mRealm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                RealmResults<TodoListGroup> results = realm.where(TodoListGroup.class).findAll();
-                results.deleteAllFromRealm();
-            }
-        });
+        new SetTodoListGroupAsyncTask(mDao, REMOVE_ALL).execute(mDummyData);
     }
-
-    private void insertOrUpdate(final TodoListGroup todoListGroup) {
-        mRealm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                realm.insertOrUpdate(todoListGroup);
-            }
-        });
+    public void remove(TodoListGroup todoListGroup) {
+        new SetTodoListGroupAsyncTask(mDao, REMOVE_ID).execute(todoListGroup);
     }
-    private void insertOrUpdate(final List<TodoListGroup> todoListGroups) {
-        mRealm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                realm.insertOrUpdate(todoListGroups);
-            }
-        });
+    public void remove(List<TodoListGroup> todoListGroups) {
+        new SetTodoListGroupAsyncTask(mDao, REMOVE_ARRAY)
+                .execute(todoListGroups.toArray(new TodoListGroup[0]));
     }
 }

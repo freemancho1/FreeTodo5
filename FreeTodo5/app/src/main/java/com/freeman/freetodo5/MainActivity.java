@@ -18,16 +18,13 @@ import com.freeman.freetodo5.todolist.group.adapter.TodoListGroupSideMenuFavorit
 import com.freeman.freetodo5.todolist.group.adapter.TodoListGroupSideMenuItemsAdapter;
 import com.freeman.freetodo5.todolist.group.model.TodoListGroup;
 import com.freeman.freetodo5.todolist.group.model.TodoListGroupRepository;
-import com.freeman.freetodo5.utils.db.RealmInitDatabase;
+import com.freeman.freetodo5.utils.db.InitDatabase;
 
 import java.util.List;
-
-import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = "[MAIN]";
 
-    private Realm mRealm;
     private DrawerLayout mMainActivity;
 
     private TodoListGroupRepository mTodoListGroupRepo;
@@ -42,8 +39,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        mRealm = Realm.getDefaultInstance();
-        mTodoListGroupRepo = new TodoListGroupRepository(mRealm);
+        mTodoListGroupRepo = new TodoListGroupRepository(getApplication());
 
         mMainActivity = findViewById(R.id.main_activity);
 
@@ -64,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         fabMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), RealmInitDatabase.class);
+                Intent intent = new Intent(getApplicationContext(), InitDatabase.class);
                 startActivity(intent);
             }
         });
@@ -81,12 +77,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mRealm != null) mRealm.close();
-    }
-
     private void setSideMenu() {
 
         findViewById(R.id.main_sidemenu_menu_today).setOnClickListener(sideMenuClickListener);
@@ -100,22 +90,22 @@ public class MainActivity extends AppCompatActivity {
         mFavoriteView = findViewById(R.id.main_sidemenu_menu_list_favorite);
         mFavoriteView.setHasFixedSize(true);
         mFavoriteView.setLayoutManager(new LinearLayoutManager(this));
-        mFavoriteAdapter.setItemLists(mTodoListGroupRepo.getFavorite());
         mFavoriteView.setAdapter(mFavoriteAdapter);
 
         mItemsAdapter = new TodoListGroupSideMenuItemsAdapter(this, mTodoListGroupRepo);
         mGroupView = findViewById(R.id.main_sidemenu_menu_list_recycler_view);
         mGroupView.setHasFixedSize(false);
         mGroupView.setLayoutManager(new LinearLayoutManager(this));
-        mItemsAdapter.setItemLists(mTodoListGroupRepo.getChildren(""));
         mGroupView.setAdapter(mItemsAdapter);
+
+        setAdapterItems();
     }
 
     private void setAdapterItems() {
 
         if (GlobalVariable.getInstance().isSideMenuFavoriteChange()) {
             GlobalVariable.getInstance().setSideMenuFavoriteChange(false);
-            List<TodoListGroup> favoriteItems = mTodoListGroupRepo.getFavorite();
+            List<TodoListGroup> favoriteItems = mTodoListGroupRepo.getFavorites();
             mFavoriteAdapter.setItemLists(favoriteItems);
             if (favoriteItems.size() > 0) {
                 mFavoriteView.setVisibility(View.VISIBLE);
@@ -150,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(LOG_TAG, "Touch Today.................");
                     break;
                 case R.id.main_sidemenu_menu_init_db:
-                    intentClass = RealmInitDatabase.class;
+                    intentClass = InitDatabase.class;
                     break;
                 case R.id.main_sidemenu_menu_group_manager:
                     intentClass = TodoListGroupManager.class;
@@ -160,11 +150,12 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
 
+            mMainActivity.closeDrawer(GravityCompat.START);
+
             if (intentClass != null) {
                 Intent intent = new Intent(getApplicationContext(), intentClass);
                 startActivity(intent);
             }
-
         }
     };
 

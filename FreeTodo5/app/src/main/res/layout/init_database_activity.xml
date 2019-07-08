@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".utils.db.RealmInitDatabase">
+    tools:context=".utils.db.InitDatabase">
 
     <TextView
         android:layout_width="wrap_content"
@@ -16,24 +16,24 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/realm_init_todogroup_button"
+            android:id="@+id/init_init_todogroup_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="INIT" />
         <Button
-            android:id="@+id/realm_removeall_todogroup_button"
+            android:id="@+id/init_removeall_todogroup_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="DELETE ALL"/>
         <Button
-            android:id="@+id/realm_getall_button"
+            android:id="@+id/init_getall_todogroup_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Get All"/>
     </LinearLayout>
 
     <TextView
-        android:id="@+id/realm_todogroup_list"
+        android:id="@+id/init_todogroup_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
