@@ -2,6 +2,8 @@ package com.freeman.freetodo5.todolist.group.adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.DrawableWrapper;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -117,14 +119,11 @@ public class TodoListGroupManagerAdapter
             mmDelete.setOnClickListener(this);
         }
 
-        private void mmGoActionClick() {
+        private void mmGoActionClick(int position, TodoListGroup todoListGroup) {
 
         }
 
-        private void mmDeleteClick() {
-            final int position = getAdapterPosition();
-            final TodoListGroup todoListGroup = mItemLists.get(position);
-
+        private void mmDeleteClick(final int position, final TodoListGroup todoListGroup) {
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
             builder.setTitle(todoListGroup.getName())
                     .setMessage(R.string.todogroup_manager_alert_delete_message)
@@ -138,9 +137,9 @@ public class TodoListGroupManagerAdapter
                     .setNegativeButton(R.string.sys_msg_cancel,
                             new DialogInterface.OnClickListener() {
                                 @Override
-                                public void onClick(DialogInterface dialog, int which) {}
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
                             });
-
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         }
@@ -166,10 +165,7 @@ public class TodoListGroupManagerAdapter
             GlobalVariable.getInstance().setSideMenuChange(true);
         }
 
-        private void mmFavoriteClick() {
-            final int position = getAdapterPosition();
-            final TodoListGroup todoListGroup = mItemLists.get(position);
-
+        private void mmFavoriteClick(int position, TodoListGroup todoListGroup) {
             if (todoListGroup.isFavorite()) {
                 mmFavorite.setColorFilter(FAVORITE_NONCHECK_COLOR);
                 mmFavorite.setImageResource(R.drawable.ic_heart_broken);
@@ -185,10 +181,7 @@ public class TodoListGroupManagerAdapter
             GlobalVariable.getInstance().setSideMenuChange(true);
         }
 
-        private void mmChildrenShowClick() {
-            int position = getAdapterPosition();
-            TodoListGroup todoListGroup = mItemLists.get(position);
-
+        private void mmChildrenShowClick(int position, TodoListGroup todoListGroup) {
             if (todoListGroup.isExpanded()) {
                 todoListGroup.setExpanded(false);
                 invisibleChildren(position+1, position);
@@ -243,18 +236,21 @@ public class TodoListGroupManagerAdapter
 
         @Override
         public void onClick(View v) {
+            int position = getAdapterPosition();
+            TodoListGroup todoListGroup = mItemLists.get(position);
+
             switch (v.getId()) {
                 case R.id.todo_list_group_manager_view_items_go_action:
-                    mmGoActionClick();
+                    mmGoActionClick(position, todoListGroup);
                     break;
                 case R.id.todo_list_group_manager_view_items_delete:
-                    mmDeleteClick();
+                    mmDeleteClick(position, todoListGroup);
                     break;
                 case R.id.todo_list_group_manager_view_items_favorite:
-                    mmFavoriteClick();
+                    mmFavoriteClick(position, todoListGroup);
                     break;
                 case R.id.todo_list_group_manager_view_items_children_show:
-                    mmChildrenShowClick();
+                    mmChildrenShowClick(position, todoListGroup);
                     break;
             }
         }

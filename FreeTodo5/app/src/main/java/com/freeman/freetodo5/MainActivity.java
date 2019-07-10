@@ -90,15 +90,16 @@ public class MainActivity extends AppCompatActivity {
         mFavoriteView = findViewById(R.id.main_sidemenu_menu_list_favorite);
         mFavoriteView.setHasFixedSize(true);
         mFavoriteView.setLayoutManager(new LinearLayoutManager(this));
+        mFavoriteAdapter.setItemLists(mTodoListGroupRepo.getFavorites());
         mFavoriteView.setAdapter(mFavoriteAdapter);
 
         mItemsAdapter = new TodoListGroupSideMenuItemsAdapter(this, mTodoListGroupRepo);
         mGroupView = findViewById(R.id.main_sidemenu_menu_list_recycler_view);
         mGroupView.setHasFixedSize(false);
         mGroupView.setLayoutManager(new LinearLayoutManager(this));
+        mItemsAdapter.setItemLists(mTodoListGroupRepo.getChildren(""));
         mGroupView.setAdapter(mItemsAdapter);
 
-        setAdapterItems();
     }
 
     private void setAdapterItems() {
