@@ -7,18 +7,22 @@ import android.content.Context;
 
 import com.freeman.freetodo5.todolist.group.model.TodoListGroup;
 import com.freeman.freetodo5.todolist.group.model.TodoListGroupDao;
+import com.freeman.freetodo5.utils.color.model.Color;
+import com.freeman.freetodo5.utils.color.model.ColorDao;
 
 @Database(
         entities = {
+                Color.class,
                 TodoListGroup.class
         },
-        version = 1,
+        version = 2,
         exportSchema = false
 )
 public abstract class AppDatabase extends RoomDatabase {
 
     private static volatile AppDatabase INSTANCE;
 
+    public abstract ColorDao colorDao();
     public abstract TodoListGroupDao todoListGroupDao();
 
     public static AppDatabase getInstance(Context context) {

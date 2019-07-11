@@ -18,6 +18,7 @@ import com.freeman.freetodo5.todolist.group.adapter.TodoListGroupSideMenuFavorit
 import com.freeman.freetodo5.todolist.group.adapter.TodoListGroupSideMenuItemsAdapter;
 import com.freeman.freetodo5.todolist.group.model.TodoListGroup;
 import com.freeman.freetodo5.todolist.group.model.TodoListGroupRepository;
+import com.freeman.freetodo5.utils.color.MyColorPicker;
 import com.freeman.freetodo5.utils.db.InitDatabase;
 
 import java.util.List;
@@ -142,6 +143,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.main_sidemenu_menu_init_db:
                     intentClass = InitDatabase.class;
+                    break;
+                case R.id.main_sidemenu_menu_settings:
+                    intentClass = MyColorPicker.class;
                     break;
                 case R.id.main_sidemenu_menu_group_manager:
                     intentClass = TodoListGroupManager.class;

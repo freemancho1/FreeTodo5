@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".todolist.group.activity.TodoListGroupAdd"></activity>
+        <activity android:name=".utils.color.MyColorPicker"></activity>
+        <activity android:name=".todolist.group.activity.TodoListGroupAdd" />
         <activity
             android:name=".todolist.group.activity.TodoListGroupManager"
             android:parentActivityName=".MainActivity" />

@@ -2,6 +2,8 @@ package com.freeman.freetodo5.utils.db;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -10,6 +12,9 @@ import com.freeman.freetodo5.GlobalVariable;
 import com.freeman.freetodo5.R;
 import com.freeman.freetodo5.todolist.group.model.TodoListGroup;
 import com.freeman.freetodo5.todolist.group.model.TodoListGroupRepository;
+import com.freeman.freetodo5.utils.color.adapter.ColorInitDbAdapter;
+import com.freeman.freetodo5.utils.color.model.Color;
+import com.freeman.freetodo5.utils.color.model.ColorRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,18 +24,36 @@ public class InitDatabase extends AppCompatActivity {
     private TodoListGroupRepository mTodoListGroupRepo;
     private TextView mTodoListGroupList;
 
+    private ColorRepository mColorRepo;
+    private RecyclerView mColorLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.init_database_activity);
         setTitle(R.string.init_db_title);
 
+        mTodoListGroupRepo = new TodoListGroupRepository(getApplication());
+        mTodoListGroupList = findViewById(R.id.init_todogroup_list);
+
+        mColorRepo = new ColorRepository(getApplication());
+        mColorLayout = findViewById(R.id.init_color_list);
+
+        Button btnAllInit = findViewById(R.id.init_all_database);
+        btnAllInit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initTodoListGroup();
+                displayTodoListGroup();
+                initColor();
+            }
+        });
+
         todoListGroupManager();
+        colorManager();
     }
 
     private void todoListGroupManager() {
-        mTodoListGroupRepo = new TodoListGroupRepository(getApplication());
-        mTodoListGroupList = findViewById(R.id.init_todogroup_list);
 
         Button btnTodoListGroupInit = findViewById(R.id.init_init_todogroup_button);
         btnTodoListGroupInit.setOnClickListener(new View.OnClickListener() {
@@ -135,4 +158,45 @@ public class InitDatabase extends AppCompatActivity {
         }
     }
 
+
+    private void colorManager() {
+
+        Button btnColorInit = findViewById(R.id.init_init_color_button);
+        btnColorInit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initColor();
+                displayColor();
+            }
+        });
+
+    }
+    private void initColor() {
+        mColorRepo.removeAll();
+
+        List<Color> colors = new ArrayList<>();
+
+        colors.add(new Color(0xFFDD0000, "색상1", true));
+        colors.add(new Color(0xFFFF0000, "색상2", true));
+        colors.add(new Color(0xFFFF2222, "색상3", true));
+        colors.add(new Color(0xFFFF5555, "색상4", true));
+        colors.add(new Color(0xFF00DD00, "색상5", true));
+        colors.add(new Color(0xFF00FF00, "색상6", true));
+        colors.add(new Color(0xFF22FF22, "색상7", true));
+        colors.add(new Color(0xFF55FF55, "색상8", true));
+        colors.add(new Color(0xFF00DDDD, "색상9", true));
+        colors.add(new Color(0xFF00FFFF, "색상10", true));
+        colors.add(new Color(0xFF22FFFF, "색상11", true));
+        colors.add(new Color(0xFF55FFFF, "색상12", true));
+
+        mColorRepo.insert(colors);
+    }
+
+    private void displayColor() {
+        ColorInitDbAdapter adapter = new ColorInitDbAdapter(this, mColorRepo);
+        mColorLayout.setHasFixedSize(true);
+        mColorLayout.setLayoutManager(new GridLayoutManager(this, 4));
+        adapter.setItemLists(mColorRepo.getAll());
+        mColorLayout.setAdapter(adapter);
+    }
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/color_picker_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/color_picker_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ColorPicker"
+        android:layout_gravity="center"/>
+
+    <ImageView
+        android:id="@+id/color_picker_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_blank_circle"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/color_picker_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"/>
+
+</LinearLayout>

@@ -20,6 +20,7 @@
     <string name="main_optionmenu_init_data">데이터 초기화</string>
 
     <string name="init_db_title">데이터 초기화</string>
+    <string name="init_db_all">Init All Database</string>
     <string name="init_db_todolistgroup">TodoListGroup</string>
     <string name="init_db_todolistgroup_remove">TodoListGroup Remove</string>
     <string name="init_db_removeall_message">Remove all</string>
