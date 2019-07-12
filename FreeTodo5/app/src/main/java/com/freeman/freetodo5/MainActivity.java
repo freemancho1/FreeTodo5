@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import com.freeman.freetodo5.todolist.group.activity.TodoListGroupAdd;
 import com.freeman.freetodo5.todolist.group.activity.TodoListGroupManager;
 import com.freeman.freetodo5.todolist.group.adapter.TodoListGroupSideMenuFavoriteAdapter;
 import com.freeman.freetodo5.todolist.group.adapter.TodoListGroupSideMenuItemsAdapter;
@@ -139,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
             switch (v.getId()) {
                 case R.id.main_sidemenu_menu_today:
-                    Log.d(LOG_TAG, "Touch Today.................");
+                    intentClass = TodoListGroupAdd.class;
                     break;
                 case R.id.main_sidemenu_menu_init_db:
                     intentClass = InitDatabase.class;

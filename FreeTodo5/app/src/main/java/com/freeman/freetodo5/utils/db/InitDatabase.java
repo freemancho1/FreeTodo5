@@ -92,51 +92,51 @@ public class InitDatabase extends AppCompatActivity {
 
         String parentId = "";
         int depth = 0;
-        todoGroups.add(new TodoListGroup("팀업무", "팀과 관련된 업무 처리", 0xFF777777, parentId, depth, 1, 0));
-        todoGroups.add(new TodoListGroup("연구개발", "연구개발과 관련된 업무 처리", 0xFF558888, parentId, depth, 2, 1));
-        todoGroups.add(new TodoListGroup("회사업무", "팀 이외에 회사 전체와 관련된 업무 처리", 0xFF4444EE, parentId, depth, 3, 0));
-        todoGroups.add(new TodoListGroup("사업지원", "사업부서 사업화 지원 업무 처리", 0xFF44DD44, parentId, depth, 4, 0));
+        todoGroups.add(new TodoListGroup("팀업무", "팀과 관련된 업무 처리", 0xFF0D6F3E, parentId, depth, 1, 0));
+        todoGroups.add(new TodoListGroup("연구개발", "연구개발과 관련된 업무 처리", 0xFFEF4C51, parentId, depth, 2, 1));
+        todoGroups.add(new TodoListGroup("회사업무", "팀 이외에 회사 전체와 관련된 업무 처리", 0xFF214196, parentId, depth, 3, 0));
+        todoGroups.add(new TodoListGroup("사업지원", "사업부서 사업화 지원 업무 처리", 0xFF23B375, parentId, depth, 4, 0));
 
         parentId = todoGroups.get(0).getId();
         depth = todoGroups.get(0).getDepth() + 1;
         todoGroups.get(0).setChildren(true);
-        todoGroups.add(new TodoListGroup("주무", "", 0xff999999, parentId, depth, 1, 0));
-        todoGroups.add(new TodoListGroup("예산담당", "", 0xff999999, parentId, depth, 2, 0));
-        todoGroups.add(new TodoListGroup("품질담당", "", 0xff999999, parentId, depth, 3, 0));
-        todoGroups.add(new TodoListGroup("보안담당", "", 0xff999999, parentId, depth, 4, 0));
+        todoGroups.add(new TodoListGroup("주무", "", 0xFF447436, parentId, depth, 1, 0));
+        todoGroups.add(new TodoListGroup("예산담당", "", 0xFF447436, parentId, depth, 2, 0));
+        todoGroups.add(new TodoListGroup("품질담당", "", 0xFF447436, parentId, depth, 3, 0));
+        todoGroups.add(new TodoListGroup("보안담당", "", 0xFF447436, parentId, depth, 4, 0));
 
         parentId = todoGroups.get(1).getId();
         depth = todoGroups.get(1).getDepth() + 1;
         todoGroups.get(1).setChildren(true);
-        todoGroups.add(new TodoListGroup("인공지능 기반 보안관제 솔루션 개발", "", 0xff55aaaa, parentId, depth, 1, 0));
-        todoGroups.add(new TodoListGroup("AI 챗봇 서비스 개발", "", 0xff55aaaa, parentId, depth, 2, 0));
-        todoGroups.add(new TodoListGroup("지하시설물 관리를 위한 AR/VR 솔루션 개발", "", 0xff55aaaa, parentId, depth, 3, 0));
+        todoGroups.add(new TodoListGroup("인공지능 기반 보안관제 솔루션 개발", "", 0xFFF2715C, parentId, depth, 1, 0));
+        todoGroups.add(new TodoListGroup("AI 챗봇 서비스 개발", "", 0xFFF2715C, parentId, depth, 2, 0));
+        todoGroups.add(new TodoListGroup("지하시설물 관리를 위한 AR/VR 솔루션 개발", "", 0xFFF2715C, parentId, depth, 3, 0));
 
         parentId = todoGroups.get(3).getId();
         depth = todoGroups.get(3).getDepth() + 1;
         todoGroups.get(3).setChildren(true);
-        todoGroups.add(new TodoListGroup("남동발전 전자결재 구축 사업", "", 0xFF55AAAA, parentId, depth, 1, 0));
-        todoGroups.add(new TodoListGroup("MDMS 구축 사업", "", 0xFF55AAAA, parentId, depth, 2, 0));
+        todoGroups.add(new TodoListGroup("남동발전 전자결재 구축 사업", "", 0xFF1DAF88, parentId, depth, 1, 0));
+        todoGroups.add(new TodoListGroup("MDMS 구축 사업", "", 0xFF1DAF88, parentId, depth, 2, 0));
 
         parentId = todoGroups.get(8).getId();
         depth = todoGroups.get(8).getDepth() + 1;
         todoGroups.get(8).setChildren(true);
-        todoGroups.add(new TodoListGroup("연구과제계획서 작성", "", 0xFFaaaaaa, parentId, depth, 1, 0));
-        todoGroups.add(new TodoListGroup("연구수행계획서 작성", "", 0xFFaaaaaa, parentId, depth, 2, 1));
-        todoGroups.add(new TodoListGroup("분석단계 수행", "", 0xFFaaaaaa, parentId, depth, 3, 0));
+        todoGroups.add(new TodoListGroup("연구과제계획서 작성", "", 0xFFF47D55, parentId, depth, 1, 0));
+        todoGroups.add(new TodoListGroup("연구수행계획서 작성", "", 0xFFF47D55, parentId, depth, 2, 1));
+        todoGroups.add(new TodoListGroup("분석단계 수행", "", 0xFFF47D55, parentId, depth, 3, 0));
 
         parentId = todoGroups.get(9).getId();
         depth = todoGroups.get(9).getDepth() + 1;
         todoGroups.get(9).setChildren(true);
-        todoGroups.add(new TodoListGroup("연구과제계획서 작성", "", 0xFFaaaaaa, parentId, depth, 1, 0));
-        todoGroups.add(new TodoListGroup("연구수행계획서 작성", "", 0xFFaaaaaa, parentId, depth, 2, 1));
+        todoGroups.add(new TodoListGroup("연구과제계획서 작성", "", 0xFFF47D55, parentId, depth, 1, 0));
+        todoGroups.add(new TodoListGroup("연구수행계획서 작성", "", 0xFFF47D55, parentId, depth, 2, 1));
 
         parentId = todoGroups.get(15).getId();
         depth = todoGroups.get(15).getDepth() + 1;
         todoGroups.get(15).setChildren(true);
-        todoGroups.add(new TodoListGroup("SW영향평가 시행", "", 0xFFaaaaaa, parentId, depth, 1, 0));
-        todoGroups.add(new TodoListGroup("용역기간 적정성 평가", "", 0xFFaaaaaa, parentId, depth, 2, 1));
-        todoGroups.add(new TodoListGroup("용역 착수", "", 0xFFaaaaaa, parentId, depth, 3, 0));
+        todoGroups.add(new TodoListGroup("SW영향평가 시행", "", 0xFFF3954D, parentId, depth, 1, 0));
+        todoGroups.add(new TodoListGroup("용역기간 적정성 평가", "", 0xFFF3954D, parentId, depth, 2, 1));
+        todoGroups.add(new TodoListGroup("용역 착수", "", 0xFFF3954D, parentId, depth, 3, 0));
 
         mTodoListGroupRepo.insert(todoGroups);
     }
@@ -176,18 +176,41 @@ public class InitDatabase extends AppCompatActivity {
 
         List<Color> colors = new ArrayList<>();
 
-        colors.add(new Color(0xFFDD0000, "색상1", true));
-        colors.add(new Color(0xFFFF0000, "색상2", true));
-        colors.add(new Color(0xFFFF2222, "색상3", true));
-        colors.add(new Color(0xFFFF5555, "색상4", true));
-        colors.add(new Color(0xFF00DD00, "색상5", true));
-        colors.add(new Color(0xFF00FF00, "색상6", true));
-        colors.add(new Color(0xFF22FF22, "색상7", true));
-        colors.add(new Color(0xFF55FF55, "색상8", true));
-        colors.add(new Color(0xFF00DDDD, "색상9", true));
-        colors.add(new Color(0xFF00FFFF, "색상10", true));
-        colors.add(new Color(0xFF22FFFF, "색상11", true));
-        colors.add(new Color(0xFF55FFFF, "색상12", true));
+        colors.add(new Color(0xFF0D6F3E, "평화", true));
+        colors.add(new Color(0xFF447436, "조화", true));
+        colors.add(new Color(0xFF088950, "안도", true));
+        colors.add(new Color(0xFF1EA563, "자립", true));
+        colors.add(new Color(0xFF61A745, "의지", true));
+
+        colors.add(new Color(0xFF23B375, "평온", true));
+        colors.add(new Color(0xFF1DAF88, "안정", true));
+        colors.add(new Color(0xFF1AAD9D, "희망", true));
+        colors.add(new Color(0xFF0BB7B9, "도전", true));
+        colors.add(new Color(0xFF17B6CC, "미래", true));
+
+        colors.add(new Color(0xFFEC1E4C, "황홀", true));
+        colors.add(new Color(0xFFEC202C, "정열", true));
+        colors.add(new Color(0xFFF04C53, "환희", true));
+        colors.add(new Color(0xFFF25F7C, "행복", true));
+        colors.add(new Color(0xFFF37670, "안락", true));
+
+        colors.add(new Color(0xFFEF4C51, "감격", true));
+        colors.add(new Color(0xFFF2715C, "희열", true));
+        colors.add(new Color(0xFFF47D55, "감동", true));
+        colors.add(new Color(0xFFF3954D, "내일", true));
+        colors.add(new Color(0xFFF5BD6A, "아이", true));
+
+        colors.add(new Color(0xFF675FAA, "공존", true));
+        colors.add(new Color(0xFF774899, "소통", true));
+        colors.add(new Color(0xFF9355A0, "화합", true));
+        colors.add(new Color(0xFFA7589A, "교감", true));
+        colors.add(new Color(0xFFCC58A1, "나눔", true));
+
+        colors.add(new Color(0xFF214196, "여유", true));
+        colors.add(new Color(0xFF1E68B3, "휴식", true));
+        colors.add(new Color(0xFF33A4DC, "자유", true));
+        colors.add(new Color(0xFF1DBDEF, "하늘", true));
+        colors.add(new Color(0xFFBBE5F5, "구름", true));
 
         mColorRepo.insert(colors);
     }
@@ -195,7 +218,7 @@ public class InitDatabase extends AppCompatActivity {
     private void displayColor() {
         ColorInitDbAdapter adapter = new ColorInitDbAdapter(this, mColorRepo);
         mColorLayout.setHasFixedSize(true);
-        mColorLayout.setLayoutManager(new GridLayoutManager(this, 4));
+        mColorLayout.setLayoutManager(new GridLayoutManager(this, 5));
         adapter.setItemLists(mColorRepo.getAll());
         mColorLayout.setAdapter(adapter);
     }

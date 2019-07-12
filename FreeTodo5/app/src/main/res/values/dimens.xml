@@ -9,6 +9,7 @@
     <dimen name="sys_fab_margin">16dp</dimen>
 
     <dimen name="sys_icon_size">16dp</dimen>
+    <dimen name="sys_large_icon_size">30dp</dimen>
 
     // Drawerlayout setting
     <dimen name="sys_drawer_width">300dp</dimen>

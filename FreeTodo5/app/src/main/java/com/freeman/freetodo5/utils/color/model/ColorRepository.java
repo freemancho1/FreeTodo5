@@ -9,6 +9,7 @@ import com.freeman.freetodo5.utils.db.AppDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
 public class ColorRepository {
@@ -44,6 +45,11 @@ public class ColorRepository {
         return result;
     }
 
+    public Color getRandomColor() {
+        List<Color> colors = getAllColor(SELECT_DEFAULT);
+        Random random = new Random();
+        return colors.get(random.nextInt(colors.size()));
+    }
     public List<Color> getAll() { return getAllColor(SELECT_ALL); }
     public List<Color> getDefault() { return getAllColor(SELECT_DEFAULT); }
     private List<Color> getAllColor(int type) {

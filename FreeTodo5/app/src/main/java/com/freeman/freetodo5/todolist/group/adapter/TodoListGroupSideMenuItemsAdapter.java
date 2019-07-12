@@ -78,7 +78,7 @@ public class TodoListGroupSideMenuItemsAdapter
             if (todoListGroup.isFavorite()) {
                 mmColor.setImageResource(R.drawable.ic_heart);
             } else {
-                mmColor.setImageResource(R.drawable.ic_blank_circle);
+                mmColor.setImageResource(R.drawable.ic_circle_blank);
             }
             mmColor.setColorFilter(todoListGroup.getColor());
             ((ViewGroup.MarginLayoutParams) mmColor.getLayoutParams())

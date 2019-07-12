@@ -36,7 +36,7 @@
                 android:id="@+id/main_sidemenu_menu_favorite_color"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/sys_icon_size"
-                android:src="@drawable/ic_blank_circle" />
+                android:src="@drawable/ic_circle_blank" />
 
             <TextView
                 android:id="@+id/main_sidemenu_menu_favorite_todogroup_name"

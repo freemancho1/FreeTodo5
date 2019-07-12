@@ -5,6 +5,7 @@
 
     <string name="sys_msg_any_task">하고 싶은 작업을 처리하세요.</string>
 
+    <string name="sys_msg_add">저장</string>
     <string name="sys_msg_delete">삭제</string>
     <string name="sys_msg_cancel">취소</string>
 
@@ -27,6 +28,12 @@
 
     <string name="todogroup_manager_title">그룹 관리</string>
     <string name="todogroup_manager_alert_delete_message">삭제 하시겠습니까?</string>
+
+    <string name="todogroup_add_name">그룹명</string>
+    <string name="todogroup_add_memo">그룹 설명</string>
+    <string name="todogroup_add_parent_name">부모그룹명</string>
+    <string name="todogroup_add_color">색상 선택</string>
+    <string name="todogroup_add_favorite">즐겨찾기</string>
 
     <string name="sample_recycler_title">TITLE</string>
     <string name="sample_recycler_contents">Contents</string>
