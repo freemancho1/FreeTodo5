@@ -1,0 +1,23 @@
+    public void insert(Color color) {
+        insertOrUpdate(mDao, INSERT_ID, color);
+    }
+    public void insert(List<Color> colors) {
+        insertOrUpdate(mDao, INSERT_ARRAY, colors.toArray(new Color[0]));
+    }
+
+    public void update(Color color) {
+        insert(color);
+    }
+    public void update(List<Color> colors) {
+        insert(colors);
+    }
+
+    public void remove(Color color) {
+        insertOrUpdate(mDao, REMOVE_ID, color);
+    }
+    public void remove(List<Color> colors) {
+        insertOrUpdate(mDao, REMOVE_ARRAY, colors.toArray(new Color[0]));
+    }
+    public void removeAll() {
+        super.removeAll(mDao, REMOVE_ALL);
+    }
