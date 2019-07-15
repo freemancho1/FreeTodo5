@@ -3,36 +3,33 @@ package com.freeman.freetodo6.todo.group.model;
 import android.app.Application;
 
 import com.freeman.freetodo6.utils.db.AppDatabase;
-import com.freeman.freetodo6.utils.db.repository.BaseRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TodoGroupRepository extends BaseRepository<TodoGroupDao, TodoGroup> {
+public class TodoGroupRepository extends TodoGroupAsyncTask {
     private static final String LOG_TAG = TodoGroupRepository.class.getSimpleName();
-
-    private final TodoGroupDao mDao;
 
     public TodoGroupRepository(Application application) {
         AppDatabase database = AppDatabase.getInstance(application);
-        mDao = database.todoListGroupDao();
+        super.setDao(database.todoListGroupDao());
     }
 
     public TodoGroup get(String id) {
-        return getOne(mDao, SELECT_ID, id);
+        return getOne(SELECT_ID, id);
     }
 
     public List<TodoGroup> getAll() { return getAll(false); }
     public List<TodoGroup> getAll(boolean withDeleteItems) {
         if (withDeleteItems) {
-            return getList(mDao, SELECT_ALL_WITH_DELETE_ITEMS, "");
+            return getList(SELECT_ALL_WITH_DELETE_ITEMS, "");
         } else {
-            return getList(mDao, SELECT_ALL, "");
+            return getList(SELECT_ALL, "");
         }
     }
 
     public List<TodoGroup> getChildren(String parentId) {
-        return getList(mDao, SELECT_CHILDREN, parentId);
+        return getList(SELECT_CHILDREN, parentId);
     }
 
     public List<TodoGroup> getTree(String parentId) {
@@ -48,14 +45,14 @@ public class TodoGroupRepository extends BaseRepository<TodoGroupDao, TodoGroup>
     }
 
     public List<TodoGroup> getFavorites() {
-        return getList(mDao, SELECT_FAVORITE, "");
+        return getList(SELECT_FAVORITE, "");
     }
 
     public void insert(TodoGroup todoGroup) {
-        insertOrUpdate(mDao, INSERT_ID, todoGroup);
+        insertOrUpdate(INSERT_ID, todoGroup);
     }
     public void insert(List<TodoGroup> todoGroups) {
-        insertOrUpdate(mDao, INSERT_ARRAY, todoGroups.toArray(new TodoGroup[0]));
+        insertOrUpdate(INSERT_ARRAY, todoGroups.toArray(new TodoGroup[0]));
     }
 
     public void update(TodoGroup todoGroup) {
@@ -75,13 +72,13 @@ public class TodoGroupRepository extends BaseRepository<TodoGroupDao, TodoGroup>
     }
 
     public void remove(TodoGroup todoGroup) {
-        insertOrUpdate(mDao, REMOVE_ID, todoGroup);
+        insertOrUpdate(REMOVE_ID, todoGroup);
     }
     public void remove(List<TodoGroup> todoGroups) {
-        insertOrUpdate(mDao, REMOVE_ARRAY, todoGroups.toArray(new TodoGroup[0]));
+        insertOrUpdate(REMOVE_ARRAY, todoGroups.toArray(new TodoGroup[0]));
     }
     public void removeAll() {
-        super.removeAll(mDao, REMOVE_ALL);
+        super.removeAll(REMOVE_ALL);
     }
 
 

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_sidemenu_menu_view_wrapper"
+    android:fillViewport="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/main_sidemenu_menu_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/main_sidemenu_menu_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:id="@+id/main_sidemenu_divider1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/main_sidemenu_menu_favorites"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/sys_spacing_16dp"
+            android:layout_marginStart="@dimen/sys_spacing_16dp"
+            android:layout_marginEnd="@dimen/sys_spacing_16dp"
+            tools:listitem="@layout/main_sidemenu_menu_favorites"/>
+
+        <View
+            android:id="@+id/main_sidemenu_divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/main_sidemenu_menu_todogroups"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/sys_spacing_16dp"
+            android:layout_marginStart="@dimen/sys_spacing_16dp"
+            android:layout_marginEnd="@dimen/sys_spacing_16dp"
+            android:scrollIndicators="start"
+            tools:listitem="@layout/main_sidemenu_menu_todogroups"/>
+
+        <View
+            android:id="@+id/main_sidemenu_divider3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
+        <include
+            layout="@layout/main_sidemenu_menu_footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/main_sidemenu_menu_today"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/sidemenu_item_height_margin"
+        android:layout_marginStart="@dimen/sys_spacing_16dp"
+        android:layout_marginEnd="@dimen/sys_spacing_16dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="@dimen/sys_icon_size"
+            android:layout_height="@dimen/sys_icon_size"
+            android:src="@drawable/ic_day_1" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sidemenu_menu_today"
+            android:layout_marginStart="@dimen/sys_spacing_16dp"
+            android:textSize="@dimen/sys_medium_text_size"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/main_sidemenu_menu_day_7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/sidemenu_item_height_margin"
+        android:layout_marginStart="@dimen/sys_spacing_16dp"
+        android:layout_marginEnd="@dimen/sys_spacing_16dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="@dimen/sys_icon_size"
+            android:layout_height="@dimen/sys_icon_size"
+            android:src="@drawable/ic_day_7" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sidemenu_menu_7_days"
+            android:layout_marginStart="@dimen/sys_spacing_16dp"
+            android:textSize="@dimen/sys_medium_text_size"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/main_sidemenu_menu_day_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/sidemenu_item_height_margin"
+        android:layout_marginBottom="@dimen/sidemenu_item_height_margin"
+        android:layout_marginStart="@dimen/sys_spacing_16dp"
+        android:layout_marginEnd="@dimen/sys_spacing_16dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="@dimen/sys_icon_size"
+            android:layout_height="@dimen/sys_icon_size"
+            android:src="@drawable/ic_day_all" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sidemenu_menu_all_days"
+            android:layout_marginStart="@dimen/sys_spacing_16dp"
+            android:textSize="@dimen/sys_medium_text_size"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -2,11 +2,17 @@ package com.freeman.freetodo6.utils.color.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
-import com.freeman.freetodo6.utils.db.model.BaseModel;
+import java.util.UUID;
 
 @Entity(tableName = "tbl_colors")
-public class Color extends BaseModel {
+public class Color {
+
+    @PrimaryKey
+    @NonNull
+    private String          id = UUID.randomUUID().toString().replaceAll("-", "");
 
     private int             color;
     @ColumnInfo(name = "default_color")
@@ -33,7 +39,7 @@ public class Color extends BaseModel {
     @Override
     public String toString() {
         return "Color{" +
-                "id='" + super.getId() + '\'' +
+                "id='" + id + '\'' +
                 ", color=" + color +
                 ", defaultColor=" + defaultColor +
                 ", name='" + name + '\'' +
@@ -41,6 +47,14 @@ public class Color extends BaseModel {
                 '}';
     }
 
+    @NonNull
+    public String getId() {
+        return id;
+    }
+
+    public void setId(@NonNull String id) {
+        this.id = id;
+    }
 
     public int getColor() {
         return color;

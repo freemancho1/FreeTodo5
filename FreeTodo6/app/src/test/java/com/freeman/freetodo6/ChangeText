@@ -1,23 +1,29 @@
-    public void insert(Color color) {
-        insertOrUpdate(mDao, INSERT_ID, color);
-    }
-    public void insert(List<Color> colors) {
-        insertOrUpdate(mDao, INSERT_ARRAY, colors.toArray(new Color[0]));
-    }
+package com.freeman.freetodo6.utils.db.dao;
 
-    public void update(Color color) {
-        insert(color);
-    }
-    public void update(List<Color> colors) {
-        insert(colors);
-    }
+import com.freeman.freetodo6.utils.db.model.BaseModel;
 
-    public void remove(Color color) {
-        insertOrUpdate(mDao, REMOVE_ID, color);
-    }
-    public void remove(List<Color> colors) {
-        insertOrUpdate(mDao, REMOVE_ARRAY, colors.toArray(new Color[0]));
-    }
-    public void removeAll() {
-        super.removeAll(mDao, REMOVE_ALL);
-    }
+import java.util.List;
+
+public interface BaseDaoInterface<MyModel extends BaseModel> {
+
+    MyModel getById(String id);
+    List<MyModel> getAll();
+    List<MyModel> getAllWithDeleteItems();
+
+    // TodoGroupDao
+    List<MyModel> getChildren(String parent_id);
+    List<MyModel> getFavorite();
+
+    // ColorDao
+    List<MyModel> getDefaultColor();
+
+    void insertOrUpdate(MyModel myModel);
+    void insertOrUpdate(MyModel... myModels);
+
+    void remove(MyModel myModel);
+    void remove(MyModel... myModel);
+    void removeAll();
+
+}
+
+

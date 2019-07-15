@@ -3,11 +3,17 @@ package com.freeman.freetodo6.todo.group.model;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
-import com.freeman.freetodo6.utils.db.model.BaseModel;
+import java.util.UUID;
 
 @Entity(tableName = "tbl_todogroups")
-public class TodoGroup extends BaseModel {
+public class TodoGroup {
+
+    @PrimaryKey
+    @NonNull
+    private String          id = UUID.randomUUID().toString().replaceAll("-", "");
 
     private String          name;
     private String          memo;
@@ -46,7 +52,7 @@ public class TodoGroup extends BaseModel {
     @Override
     public String toString() {
         return "TodoGroup{" +
-                "id='" + super.getId() + '\'' +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", memo='" + memo + '\'' +
                 ", color=" + color +
@@ -58,6 +64,15 @@ public class TodoGroup extends BaseModel {
                 ", isDelete=" + isDelete +
                 ", isExpanded=" + isExpanded +
                 '}';
+    }
+
+    @NonNull
+    public String getId() {
+        return id;
+    }
+
+    public void setId(@NonNull String id) {
+        this.id = id;
     }
 
     public String getName() {

@@ -2,5 +2,18 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#00695C</color>
+    <color name="colorAccentOrginal">#D81B60</color>
+
+    <color name="colorWhite">#ffffff</color>
+
+    <color name="colorLightGray">#eeeeee</color>
+    <color name="colorMediumGray">#cccccc</color>
+    <color name="colorDarkGray">#aaaaaa</color>
+
+    <color name="colorLightRed">#FFEE3333</color>
+
+    <color name="colorNavHeaderBackgroundStart">#4DB6AC</color>
+    <color name="colorNavHeaderBackgroundCenter">#009688</color>
+    <color name="colorNavHeaderBackgroundEnd">#00695C</color>
 </resources>
