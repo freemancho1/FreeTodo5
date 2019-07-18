@@ -10,6 +10,7 @@ public class BaseAsyncTask {
     public static final int SELECT_FAVORITE = 1005;
 
     public static final int SELECT_DEFAULT = 1006;
+    public static final int SELECT_MAX_SEQ = 1007;
 
     public static final int INSERT_ID = 2001;       // with update
     public static final int INSERT_ARRAY = 2002;    // with update

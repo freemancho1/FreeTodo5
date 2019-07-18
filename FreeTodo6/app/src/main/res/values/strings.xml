@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Free Todo5</string>
+    <string name="app_name">Free Todo</string>
     <string name="nav_drawer_open">Open navigation drawer</string>
     <string name="nav_drawer_close">Close navigation drawer</string>
 
@@ -8,6 +8,9 @@
     <string name="sys_add">저장</string>
     <string name="sys_delete">삭제</string>
     <string name="sys_cancel">취소</string>
+    <string name="sys_init">초기화</string>
+    <string name="sys_required">필수항목입니다.</string>
+    <string name="sys_alert_delete_message">삭제 하시겠습니까?</string>
 
     <string name="sidemenu_header_subtitle">언제, 어디서나, 즐겁고, 자유롭게\n당신의 일정을 관리하세요.</string>
     <string name="sidemenu_header_copyright">freeman.no1@kdn.com</string>
@@ -20,14 +23,19 @@
 
     <string name="main_optionmenu_init_data">데이터 초기화</string>
 
+    <string name="db_all">전체 테이블</string>
+    <string name="db_todogroup">TodoGroup</string>
+    <string name="db_color">Color</string>
+
     <string name="init_db_title">데이터 초기화</string>
-    <string name="init_db_all">Init All Database</string>
-    <string name="init_db_todolistgroup">TodoListGroup</string>
-    <string name="init_db_todolistgroup_remove">TodoListGroup Remove</string>
-    <string name="init_db_removeall_message">Remove all</string>
+    <string name="init_db_all_message">전체 테이블 초기화</string>
+    <string name="remove_db_all_message">전체 테이블 삭제</string>
+    <string name="init_db_todogroup_message">TodoGroup 테이블 초기화</string>
+    <string name="remove_db_todogroup_message">TodoGroup 테이블 전체 삭제</string>
+    <string name="init_db_color_message">Color 테이블 초기화</string>
+    <string name="remove_db_color_message">Color 테이블 전체 삭제</string>
 
     <string name="todogroup_manager_title">그룹 관리</string>
-    <string name="todogroup_manager_alert_delete_message">삭제 하시겠습니까?</string>
 
     <string name="todogroup_add_name">그룹명</string>
     <string name="todogroup_add_memo">그룹 설명</string>

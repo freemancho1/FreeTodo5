@@ -4,7 +4,7 @@ public class AppStatus {
     private static AppStatus INSTANCE = null;
 
     private boolean isFavoriteChange = true;
-    private boolean isGroupMessageChange = true;
+    private boolean isMenuChange = true;
 
     public boolean isFavoriteChange() {
         return isFavoriteChange;
@@ -14,17 +14,17 @@ public class AppStatus {
         isFavoriteChange = favoriteChange;
     }
 
-    public boolean isGroupMessageChange() {
-        return isGroupMessageChange;
+    public boolean isMenuChange() {
+        return isMenuChange;
     }
 
-    public void setGroupMessageChange(boolean groupMessageChange) {
-        isGroupMessageChange = groupMessageChange;
+    public void setMenuChange(boolean groupMessageChange) {
+        isMenuChange = groupMessageChange;
     }
 
     public void setSideMenuChange(boolean sideMenuChange) {
         isFavoriteChange = sideMenuChange;
-        isGroupMessageChange = sideMenuChange;
+        isMenuChange = sideMenuChange;
     }
 
     public static synchronized AppStatus getInstance() {

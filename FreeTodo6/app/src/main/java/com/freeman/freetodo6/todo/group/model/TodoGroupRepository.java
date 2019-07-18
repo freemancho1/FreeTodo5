@@ -32,6 +32,10 @@ public class TodoGroupRepository extends TodoGroupAsyncTask {
         return getList(SELECT_CHILDREN, parentId);
     }
 
+    public TodoGroup getMaxSequence(String parentId) {
+        return getOne(SELECT_MAX_SEQ, parentId);
+    }
+
     public List<TodoGroup> getTree(String parentId) {
         List<TodoGroup> results = new ArrayList<>();
         List<TodoGroup> children = getChildren(parentId);

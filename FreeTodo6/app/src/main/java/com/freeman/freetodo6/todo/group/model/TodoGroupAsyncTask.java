@@ -67,6 +67,8 @@ public class TodoGroupAsyncTask extends BaseAsyncTask {
             switch (mType) {
                 case SELECT_ID:
                     return mDao.getById(params[0]);
+                case SELECT_MAX_SEQ:
+                    return mDao.getMaxSequence(params[0]);
             }
 
             return null;

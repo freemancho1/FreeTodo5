@@ -25,6 +25,10 @@ public interface TodoGroupDao {
             "WHERE is_delete = 0 AND parent_id = :parent_id ORDER BY sequence ASC")
     List<TodoGroup> getChildren(String parent_id);
 
+    @Query("SELECT * FROM tbl_todogroups " +
+            "WHERE is_delete = 0 AND parent_id = :parent_id ORDER BY sequence DESC LIMIT 1")
+    TodoGroup getMaxSequence(String parent_id);
+
     @Query("SELECT * FROM tbl_todogroups WHERE is_delete = 0 AND is_favorite = 1")
     List<TodoGroup> getFavorite();
 

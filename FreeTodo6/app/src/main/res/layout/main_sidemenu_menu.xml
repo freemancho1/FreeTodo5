@@ -22,6 +22,7 @@
             android:id="@+id/main_sidemenu_divider1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:visibility="gone"
             android:background="?android:attr/listDivider" />
 
         <android.support.v7.widget.RecyclerView
@@ -37,6 +38,7 @@
             android:id="@+id/main_sidemenu_divider2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:visibility="gone"
             android:background="?android:attr/listDivider" />
 
         <android.support.v7.widget.RecyclerView
@@ -47,7 +49,7 @@
             android:layout_marginStart="@dimen/sys_spacing_16dp"
             android:layout_marginEnd="@dimen/sys_spacing_16dp"
             android:scrollIndicators="start"
-            tools:listitem="@layout/main_sidemenu_menu_todogroups"/>
+            tools:listitem="@layout/todogroup_list_items"/>
 
         <View
             android:id="@+id/main_sidemenu_divider3"

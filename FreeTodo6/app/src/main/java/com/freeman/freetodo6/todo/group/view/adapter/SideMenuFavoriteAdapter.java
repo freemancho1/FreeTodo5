@@ -67,7 +67,7 @@ public class SideMenuFavoriteAdapter
         private TextView mmParentName;
         private TextView mmCount;
 
-        public ThisViewHolder(@NonNull View itemView) {
+        private ThisViewHolder(@NonNull View itemView) {
             super(itemView);
 
             mmGoAction = itemView.findViewById(R.id.main_sidemenu_menu_favorite_go_action);
@@ -77,7 +77,7 @@ public class SideMenuFavoriteAdapter
             mmCount = itemView.findViewById(R.id.main_sidemenu_menu_favorite_count);
         }
 
-        public void onBindData(final TodoGroup todoGroup) {
+        private void onBindData(final TodoGroup todoGroup) {
             Log.d(LOG_TAG, todoGroup.toString());
 
             mmColor.setColorFilter(todoGroup.getColor());
